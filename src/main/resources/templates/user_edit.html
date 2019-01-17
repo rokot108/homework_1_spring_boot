@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<h1>New User Registration</h1>
+<h1 th:text="${msg}">User Edit/Registration page</h1>
 
 <form action="#" th:action="@{/user_edit}" th:object="${user}" method="post">
     <input type="text" th:field="*{login}"/>

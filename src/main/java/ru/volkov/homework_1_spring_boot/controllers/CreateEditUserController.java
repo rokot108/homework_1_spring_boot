@@ -10,6 +10,7 @@ import ru.volkov.homework_1_spring_boot.model.User;
 import ru.volkov.homework_1_spring_boot.services.UserService;
 
 import javax.validation.Valid;
+import java.time.LocalTime;
 
 @Controller
 public class CreateEditUserController {
@@ -22,14 +23,17 @@ public class CreateEditUserController {
                                          ModelAndView modelAndView) {
 
         if (id == null || id.isEmpty() || !userService.existsById(id)) {
-            modelAndView.addObject("page-message", "New user registration");
+            modelAndView.addObject("msg", "New user registration");
+            modelAndView.addObject("time", LocalTime.now());
+            modelAndView.addObject("msg1", "New message");
+            modelAndView.addObject("msg34455vegehreahjsrtejiik", "New message");
             modelAndView.addObject("user", userService.createNewUser());
             modelAndView.setViewName("user_edit");
             return modelAndView;
         }
-        modelAndView.addObject("page-message", "User data editing");
 
-
+        modelAndView.addObject("msg", "User data edit page");
+        modelAndView.addObject(userService.getById(id));
         return modelAndView;
     }
 
