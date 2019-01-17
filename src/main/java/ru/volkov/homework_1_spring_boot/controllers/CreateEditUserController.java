@@ -24,9 +24,6 @@ public class CreateEditUserController {
 
         if (id == null || id.isEmpty() || !userService.existsById(id)) {
             modelAndView.addObject("msg", "New user registration");
-            modelAndView.addObject("time", LocalTime.now());
-            modelAndView.addObject("msg1", "New message");
-            modelAndView.addObject("msg34455vegehreahjsrtejiik", "New message");
             modelAndView.addObject("user", userService.createNewUser());
             modelAndView.setViewName("user_edit");
             return modelAndView;
