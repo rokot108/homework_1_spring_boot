@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+          
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
+    <title>UsersList</title>
+</head>
+<body>
+
+<h1>All Users List</h1>
+
+<div class="flex-container">
+    <table>
+        <caption>Users:</caption>
+        <tr>
+            <th>Login</th>
+            <th>Email</th>
+            <th>Password</th>
+        </tr>
+        <tr th:each="user:${userList}">
+            <td th:text="${user.getLogin()}"/>
+            <td th:text="${user.getEmail()}"/>
+            <td th:text="${user.getPassword()}"/>
+        </tr>
+    </table>
+</div>
+
+<input value="Create new userAcc" type="button" onclick="location.href='new_user/user_edit'"/>
+
+</body>
+</html>

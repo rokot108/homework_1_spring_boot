@@ -1,0 +1,23 @@
+.link {
+    font-size: x-large;
+    font-weight: bold;
+    color: deepskyblue;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+table,
+th,
+td {
+    align-items: center;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+table caption {
+text-align: left;
+}
