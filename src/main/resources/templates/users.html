@@ -1,14 +1,17 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
           
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
-    <link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
     <title>UsersList</title>
 </head>
 <body>
 
 <h1>All Users List</h1>
+
+<form th:action="@{/logout}" method="POST">
+    <input type="submit" value="Logout"/>
+</form>
 
 <div class="flex-container">
     <table>

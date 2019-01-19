@@ -9,9 +9,21 @@
 <h1 th:text="${msg}">User Edit/Registration page</h1>
 
 <form action="#" th:action="@{/user_edit}" th:object="${user}" method="post">
-    <input type="text" th:field="*{login}"/>
-    <input type="text" th:field="*{password}"/>
-    <input type="text" th:field="*{email}"/>
+    <div>
+        <label>Username (Login)</label>
+        <label th:if="${#fields.hasErrors('login')}" th:errors="*{login}"/>
+        <input type="text" th:field="*{login}"/>
+    </div>
+    <div>
+        <label>Set password</label>
+        <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}"/>
+        <input type="text" th:field="*{password}"/>
+    </div>
+    <div>
+        <label>Email</label>
+        <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}"/>
+        <input type="text" th:field="*{email}"/>
+    </div>
     <input type="submit" value="Done!"/>
 </form>
 

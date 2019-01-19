@@ -13,12 +13,15 @@ public class User extends AbstractEntity {
     private String login;
 
     @Column
-    @Size(min = 3, max = 20)
+    @Size(min = 3, max = 100)
     private String password;
 
     @Column
     @Email
     private String email;
+
+    @Column
+    String[] roles;
 
     public User() {
     }
@@ -45,5 +48,13 @@ public class User extends AbstractEntity {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String[] getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String[] roles) {
+        this.roles = roles;
     }
 }

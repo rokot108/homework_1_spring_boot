@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.volkov.homework_1_spring_boot.model.User;
 import ru.volkov.homework_1_spring_boot.repository.UserRepository;
@@ -42,6 +43,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean existsByEmail(String email) {
+        return repository.existsByEmail(email);
+    }
+
+    @Override
     public void save(User entity) {
         repository.save(entity);
     }
@@ -57,7 +63,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void initUser(String login, String password, String email) {
+    public void initUser(String login, String password, String email, String... roles) {
         if (repository.existsByLogin(login)) {
             return;
         }
@@ -65,6 +71,7 @@ public class UserServiceImpl implements UserService {
         user.setLogin(login);
         user.setPassword(password);
         user.setEmail(email);
+        user.setRoles(roles);
         repository.save(user);
     }
 
