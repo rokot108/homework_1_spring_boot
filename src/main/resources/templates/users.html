@@ -29,7 +29,9 @@
     </table>
 </div>
 
-<input value="Create new userAcc" type="button" onclick="location.href='new_user/user_edit'"/>
+<form th:action="@{/registration}" method="GET">
+    <input type="submit" value="Create new user"/>
+</form>
 
 </body>
 </html>

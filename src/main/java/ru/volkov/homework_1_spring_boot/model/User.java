@@ -13,7 +13,7 @@ public class User extends AbstractEntity {
     private String login;
 
     @Column
-    @Size(min = 3, max = 100)
+    @Size(min = 3)
     private String password;
 
     @Column
