@@ -3,6 +3,8 @@ package ru.volkov.homework_1_spring_boot.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import ru.volkov.homework_1_spring_boot.services.UserService;
 
@@ -21,4 +23,9 @@ public class UsersController {
         return modelAndView;
     }
 
+    @PostMapping("/users/{id}/delete")
+    public String deleteUser(@PathVariable String id) {
+        userService.deleteById(id);
+        return "redirect:/users";
+    }
 }

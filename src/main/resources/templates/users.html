@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
           
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
@@ -19,12 +20,20 @@
         <tr>
             <th>Login</th>
             <th>Email</th>
-            <th>Password</th>
+            <th>Password hash</th>
+            <th>Account Actions</th>
         </tr>
         <tr th:each="user:${userList}">
             <td th:text="${user.getLogin()}"/>
             <td th:text="${user.getEmail()}"/>
             <td th:text="${user.getPassword()}"/>
+            <td>
+                <form sec:authorize="hasRole('ADMIN')"
+                      th:action="@{'/users/'+${user.getId()}+'/delete'}"
+                      method="POST">
+                    <input type="submit" value="Delete user"/>
+                </form>
+            </td>
         </tr>
     </table>
 </div>

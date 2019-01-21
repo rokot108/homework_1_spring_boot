@@ -11,6 +11,8 @@ public interface UserRepository extends PagingAndSortingRepository<User, String>
 
     User getById(String id);
 
+    void deleteById(String id);
+
     boolean existsById(String id);
 
     boolean existsByLogin(String login);

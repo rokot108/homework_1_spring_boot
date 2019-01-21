@@ -22,6 +22,8 @@ public interface UserService extends ServiceInterface<User> {
 
     void remove(User entity);
 
+    void deleteById(String id);
+
     User getUserByLogin(String login);
 
     void initUser(String login, String password, String email, String... roles);
