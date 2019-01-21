@@ -28,7 +28,7 @@
             <td th:text="${user.getEmail()}"/>
             <td th:text="${user.getPassword()}"/>
             <td>
-                <form sec:authorize="hasRole('ADMIN')"
+                <form th:if="${#authorization.getAuthentication().getName()==user.getLogin()||#authorization.expression('hasRole(''ADMIN'')')}"
                       th:action="@{'/users/'+${user.getId()}+'/delete'}"
                       method="POST">
                     <input type="submit" value="Delete user"/>
