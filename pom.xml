@@ -96,7 +96,7 @@
                 </executions>
                 <configuration>
                     <sources>
-                        <source>src/main/resources</source>
+                        <source>src/main/resources/webservices</source>
                     </sources>
                     <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
                     <clearOutputDir>false</clearOutputDir>
