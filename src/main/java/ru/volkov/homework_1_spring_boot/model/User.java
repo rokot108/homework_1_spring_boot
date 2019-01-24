@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
+import java.util.Arrays;
+import java.util.List;
 
 @Entity
 public class User extends AbstractEntity {
@@ -13,12 +15,15 @@ public class User extends AbstractEntity {
     private String login;
 
     @Column
-    @Size(min = 3, max = 20)
+    @Size(min = 3)
     private String password;
 
     @Column
     @Email
     private String email;
+
+    @Column
+    String[] roles;
 
     public User() {
     }
@@ -45,5 +50,18 @@ public class User extends AbstractEntity {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String[] getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String[] roles) {
+        this.roles = roles;
+    }
+
+    public boolean hasRole(String role) {
+        final List<String> rolesList = Arrays.asList(roles);
+        return rolesList.contains(role);
     }
 }

@@ -16,11 +16,15 @@ public interface UserService extends ServiceInterface<User> {
 
     boolean existsByLogin(String login);
 
+    boolean existsByEmail(String email);
+
     void save(User entity);
 
     void remove(User entity);
 
+    void deleteById(String id);
+
     User getUserByLogin(String login);
 
-    void initUser(String login, String password, String email);
+    void initUser(String login, String password, String email, String... roles);
 }
