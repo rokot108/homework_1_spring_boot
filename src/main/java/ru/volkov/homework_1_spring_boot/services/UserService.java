@@ -4,7 +4,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import ru.volkov.homework_1_spring_boot.model.User;
 
-public interface UserService extends ServiceInterface<User> {
+import java.util.List;
+
+public interface UserService {
+
+    User getById(String id);
+
+    List<User> getAll();
 
     User createNewUser();
 

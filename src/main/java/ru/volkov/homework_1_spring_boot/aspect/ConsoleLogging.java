@@ -1,4 +1,4 @@
-package ru.volkov.homework_1_spring_boot.Aspect;
+package ru.volkov.homework_1_spring_boot.aspect;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
