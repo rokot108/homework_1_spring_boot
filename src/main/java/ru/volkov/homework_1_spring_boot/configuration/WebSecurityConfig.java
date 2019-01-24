@@ -36,28 +36,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers("/ws/*")
                 .permitAll()
-
-                .anyRequest()
-                .authenticated()
-
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/users")
+                .antMatchers("/ws*")
                 .permitAll()
 
+                /*  .anyRequest()
+                  .authenticated()
 
-                .and()
-                .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/login?logout")
-                .deleteCookies("JSESSIONID")
-                .permitAll()
+                  .and()
+                  .formLogin()
+                  .loginPage("/login")
+                  .defaultSuccessUrl("/users")
+                  .permitAll()
 
+
+                  .and()
+                  .logout()
+                  .logoutUrl("/logout")
+                  .logoutSuccessUrl("/login?logout")
+                  .deleteCookies("JSESSIONID")
+                  .permitAll()
+
+                  .and()
+                  .rememberMe()
+                  .key("uniqueAndSecret")
+                  .tokenValiditySeconds(60 * 60 * 24)*/
                 .and()
-                .rememberMe()
-                .key("uniqueAndSecret")
-                .tokenValiditySeconds(60 * 60 * 24)
+                .csrf().disable()
         ;
     }
 }

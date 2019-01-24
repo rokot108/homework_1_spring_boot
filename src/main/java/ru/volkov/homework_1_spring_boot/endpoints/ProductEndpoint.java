@@ -17,7 +17,7 @@ public class ProductEndpoint {
     @Autowired
     ProductService productService;
 
-    @PayloadRoot(namespace = "http://localhost:8080/products", localPart = "GetProductDetailsRequest")
+    @PayloadRoot(namespace = "http://www.product.org", localPart = "GetProductDetailsRequest")
     @ResponsePayload
     public GetProductDetailsResponse processProductDetailsRequest(@RequestPayload GetProductDetailsRequest request) {
         GetProductDetailsResponse response = new GetProductDetailsResponse();
