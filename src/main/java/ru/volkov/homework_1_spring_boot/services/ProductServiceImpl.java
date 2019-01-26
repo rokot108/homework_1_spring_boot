@@ -16,7 +16,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getById(int id) {
-        return null;
+        return repository.getOne(id);
     }
 
     @Override

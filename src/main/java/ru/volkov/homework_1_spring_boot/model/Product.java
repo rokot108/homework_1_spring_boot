@@ -42,4 +42,9 @@ public class Product {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Nomenclature number %d, Productname %s, Description %s", this.numenclature, this.name, this.description);
+    }
 }
