@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -35,6 +34,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers("/css/*")
                 .permitAll()
+                .antMatchers("/ws/*")
+                .permitAll()
+                .antMatchers("/ws*")
+                .permitAll()
 
                 .anyRequest()
                 .authenticated()
@@ -57,6 +60,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .rememberMe()
                 .key("uniqueAndSecret")
                 .tokenValiditySeconds(60 * 60 * 24)
+
+                .and()
+                .csrf()
+                .ignoringAntMatchers("/ws")
         ;
     }
 }
