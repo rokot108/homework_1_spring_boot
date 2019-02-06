@@ -14,12 +14,27 @@ import ru.volkov.homework_1_spring_boot.dto.ProductDTO;
 import ru.volkov.homework_1_spring_boot.model.Product;
 import ru.volkov.homework_1_spring_boot.services.ProductService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/api/product")
 public class ProductApiController {
 
     @Autowired
     ProductService productService;
+
+    @GetMapping("/allproducts")
+    public ResponseEntity<List<ProductDTO>> getAllProducts() {
+        List<Product> products = productService.getAll();
+        List<ProductDTO> productDTOS = new ArrayList<>();
+        for (int i = 0; i < products.size(); i++) {
+            ProductDTO productDTO = new ProductDTO();
+            BeanUtils.copyProperties(products.get(i), productDTO);
+            productDTOS.add(productDTO);
+        }
+        return new ResponseEntity<List<ProductDTO>>(productDTOS, HttpStatus.OK);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> getProduct(@PathVariable int id) {
@@ -41,8 +56,26 @@ public class ProductApiController {
         if (productService.addNewProduct(newProduct)) {
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(builder.path("/api/product/{id}").buildAndExpand(newProduct.getNomenclature()).toUri());
-            return new ResponseEntity<Void>(HttpStatus.CREATED);
+            return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
         }
         return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+    }
+
+    @DeleteMapping("/{id}")
+    @Secured("ROLE_ADMIN")
+    public ResponseEntity<Void> deleteProduct(@PathVariable int id) {
+        productService.remove(id);
+        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping
+    @Secured("ROLE_ADMIN")
+    public ResponseEntity<Void> updateProduct(@RequestBody ProductDTO productDTO) {
+        Product product = productService.createNewProduct();
+        BeanUtils.copyProperties(productDTO, product);
+        if (productService.mergeProducts(product)) {
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        }
+        return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 }

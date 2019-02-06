@@ -26,7 +26,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getAll() {
-        return null;
+        return repository.findAll();
     }
 
     @Override
@@ -42,8 +42,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void remove(Product entity) {
-
+    public void remove(int id) {
+        repository.removeByNomenclature(id);
     }
 
     @Override
@@ -59,5 +59,14 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product createNewProduct() {
         return new Product();
+    }
+
+    @Override
+    public boolean mergeProducts(Product entity) {
+        if (repository.existsById(entity.getNomenclature())) {
+            repository.save(entity);
+            return true;
+        }
+        return false;
     }
 }

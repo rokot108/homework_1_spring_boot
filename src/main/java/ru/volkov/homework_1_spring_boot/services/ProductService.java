@@ -16,9 +16,12 @@ public interface ProductService {
 
     boolean addNewProduct(Product entity);
 
-    void remove(Product entity);
+    void remove(int id);
 
     void initProduct(int nomenclature, String name, String description);
 
     Product createNewProduct();
+
+    boolean mergeProducts(Product entity);
+
 }
