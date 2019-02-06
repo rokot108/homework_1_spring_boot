@@ -63,7 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Configuration
     @Order(1)
-    public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
+    public static class WebServiceWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
 
         protected void configure(HttpSecurity http) throws Exception {
             http
@@ -72,7 +72,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .anyRequest()
                     .authenticated()
                     .and()
-                    .httpBasic();
+                    .httpBasic()
+                    .and()
+                    .csrf()
+                    .disable();
+        }
+
+    }
+
+    @Configuration
+    @Order(2)
+    public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
+
+        protected void configure(HttpSecurity http) throws Exception {
+            http
+                    .antMatcher("/api/**")
+                    .authorizeRequests()
+                    .anyRequest()
+                    .authenticated()
+                    .and()
+                    .httpBasic()
+                    .and()
+                    .csrf()
+                    .disable();
         }
 
     }
