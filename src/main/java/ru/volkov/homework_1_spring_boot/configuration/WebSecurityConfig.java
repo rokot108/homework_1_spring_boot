@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/registration", "/css/*")
                 .permitAll()
 
-                .anyRequest()
+                .antMatchers("/users")
                 .authenticated()
 
                 .and()
@@ -72,6 +72,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Order(1)
     public static class WebServiceWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
 
+        @Override
         protected void configure(HttpSecurity http) throws Exception {
             http
                     .antMatcher("/ws/**")
@@ -91,6 +92,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Order(2)
     public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
 
+        @Override
         protected void configure(HttpSecurity http) throws Exception {
             http
                     .antMatcher("/api/**")

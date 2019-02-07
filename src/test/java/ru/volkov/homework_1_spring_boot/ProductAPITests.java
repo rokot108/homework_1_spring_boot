@@ -7,10 +7,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -46,18 +43,16 @@ public class ProductAPITests {
     @Autowired
     BCryptPasswordEncoder passwordEncoder;
 
-    /*@Autowired
-    private TestRestTemplate template;*/
-
-
     @Before
     public void setUp() {
+
         Product product = new Product();
         product.setNomenclature(5);
         product.setName("Kolbasa");
         product.setDescription("Krakovskaya");
 
-        Mockito.when(productService.getById(product.getNomenclature())).thenReturn(product);
+        Mockito.when(productService.existById(5)).thenReturn(true);
+        Mockito.when(productService.getById(5)).thenReturn(product);
 
         User user = new User();
         user.setId("1");
@@ -65,8 +60,6 @@ public class ProductAPITests {
         user.setPassword(passwordEncoder.encode("user"));
         user.setRoles(new String[]{"USER"});
         user.setEmail("test@yandex.ru");
-
-        String[] adminRole = new String[]{"ADMIN"};
 
         Mockito.when(userService.getUserByLogin("user")).thenReturn(user);
         Mockito.when(userService.getById("1")).thenReturn(user);
@@ -80,8 +73,23 @@ public class ProductAPITests {
             MockHttpServletRequest request = new MockHttpServletRequest();
             request.setRequestURI("/api/product/5");
             request.setServerPort(8080);
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println("Requested URL is: " + request.getRequestURL());
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
             request.setMethod("GET");
-           // request.addHeader("Authorization", "Basic dXNlcjp1c2Vy");
+            // request.addHeader("Authorization", "Basic dXNlcjp1c2Vy");
             request.setContentType(MediaType.APPLICATION_JSON_UTF8.toString());
             return request;
         };
@@ -109,10 +117,4 @@ public class ProductAPITests {
                 .andExpect(status().isOk());
     }
 
-   /* @Test
-    public void getProductByTestRestTemplate() throws Exception {
-        ResponseEntity<String> result = template.withBasicAuth("user", "user")
-                .getForEntity("/api/product/5", String.class);
-        assert (HttpStatus.OK == result.getStatusCode());
-    }*/
 }
