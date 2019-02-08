@@ -14,7 +14,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
-import org.springframework.web.context.WebApplicationContext;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import ru.volkov.homework_1_spring_boot.model.Product;
 import ru.volkov.homework_1_spring_boot.model.User;
 import ru.volkov.homework_1_spring_boot.services.ProductService;
@@ -22,6 +22,7 @@ import ru.volkov.homework_1_spring_boot.services.UserService;
 
 import javax.servlet.ServletContext;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -37,8 +38,6 @@ public class ProductAPITests {
     @MockBean
     UserService userService;
 
-    @Autowired
-    WebApplicationContext webApplicationContext;
 
     @Autowired
     BCryptPasswordEncoder passwordEncoder;
@@ -81,7 +80,9 @@ public class ProductAPITests {
 
         mvc
                 .perform(requestBuilder)
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("name").value("Kolbasa"));
     }
 
     @Test
