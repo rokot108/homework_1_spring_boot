@@ -1,22 +1,13 @@
-package ru.volkov.homework_1_spring_boot.model;
+package ru.volkov.homework_1_spring_boot.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-@Entity
-public class Product {
-
-    @Id
+public class ProductDTO {
     private int nomenclature;
 
-    @Column
     private String name;
 
-    @Column
     private String description;
 
-    public Product() {
+    public ProductDTO() {
     }
 
     public int getNomenclature() {
@@ -41,10 +32,5 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("Nomenclature number %d, Productname %s, Description %s", this.nomenclature, this.name, this.description);
     }
 }

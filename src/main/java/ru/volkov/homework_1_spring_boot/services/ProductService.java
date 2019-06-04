@@ -8,13 +8,20 @@ public interface ProductService {
 
     Product getById(int id);
 
+    boolean existById(int id);
+
     List<Product> getAll();
 
     void save(Product entity);
 
-    void remove(Product entity);
+    boolean addNewProduct(Product entity);
+
+    void remove(int id);
 
     void initProduct(int nomenclature, String name, String description);
 
     Product createNewProduct();
+
+    boolean mergeProducts(Product entity);
+
 }

@@ -6,4 +6,9 @@ import ru.volkov.homework_1_spring_boot.model.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
+
+    boolean existsByNomenclature(int nomenclature);
+
+    void removeByNomenclature(int nomenclature);
+
 }
